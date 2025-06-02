@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+h1, h2{
+  font-family: "Belleza", sans-serif;
+}
+
+h3, h4, h5{
+  font-family: "Playfair Display", serif;
+}
+
+
+
+@theme{
+  --color-hope-indigo: #2B2258;
+  --color-hope-blue: #96B0BA;
+  --color-hope-aquablue: #176FB9;
+  --color-hope-black: #000000; 
+  --color-hope-platinum: #DADBDC; 
+}
+
