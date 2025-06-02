@@ -1,10 +1,22 @@
 import './App.css'
+import AboutUs from './components/AboutUs'
+import ContactUs from './components/ContactUs'
+import Footer from './components/Footer'
+import JourneyCards from './components/JourneyCards'
+import Navbar from './components/Navbar'
+import Stories from './components/Stories'
 
 function App() {
 
   return (
     <div>
-      <h1 className='text-8xl font-bold'>Manifest of Hope</h1>
+      <Navbar></Navbar>
+      <Hero></Hero>
+      <AboutUs></AboutUs>
+      <JourneyCards></JourneyCards>
+      <Stories></Stories>
+      <ContactUs></ContactUs>
+      <Footer></Footer>
     </div>
   )
 }

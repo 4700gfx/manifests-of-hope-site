@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+body{
+  background-color: #2B2258;
+}
+
 h1, h2{
   font-family: "Belleza", sans-serif;
 }
