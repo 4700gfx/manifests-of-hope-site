@@ -11,12 +11,6 @@ function App() {
   return (
     <div>
       <Navbar></Navbar>
-      <Hero></Hero>
-      <AboutUs></AboutUs>
-      <JourneyCards></JourneyCards>
-      <Stories></Stories>
-      <ContactUs></ContactUs>
-      <Footer></Footer>
     </div>
   )
 }
