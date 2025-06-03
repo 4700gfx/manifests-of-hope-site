@@ -15,14 +15,14 @@ const Navbar = () => {
         {/* Logo */}
         <div className="flex items-center space-x-3">
           <img src={logo} alt="logo" className="h-12 w-auto" />
-          <span className="text-2xl font-bold tracking-wider">Manifest of Hope</span>
+          <span className="text-xl font-bold tracking-wider">Manifest of Hope</span>
         </div>
 
         {/* Nav links */}
         <ul className="flex space-x-8 font-semibold">
           {Object.keys(navTabs).map((key) => (
-            <li key={key} className="hover:text-[#C0C0AF] transition duration-300">
-              <a href="#" className="text-lg">{navTabs[key]}</a>
+            <li key={key} className="mx-10 p-3 hover:bg-hope-aquablue hover:rounded-full transition duration-300">
+              <a href="#" className="text-lg font-bold">{navTabs[key]}</a>
             </li>
           ))}
         </ul>
