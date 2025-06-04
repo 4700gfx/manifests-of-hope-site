@@ -15,18 +15,26 @@ const Navbar = () => {
         {/* Logo */}
         <div className="flex items-center space-x-3">
           <img src={logo} alt="logo" className="h-12 w-auto" />
-          <span className="text-xl font-bold tracking-wider">Manifest of Hope</span>
         </div>
 
-        {/* Nav links */}
+        {/* Nav links - centered */}
         <ul className="flex space-x-8 font-semibold">
           {Object.keys(navTabs).map((key) => (
-            <li key={key} className="mx-10 p-3 hover:bg-hope-aquablue hover:rounded-full transition duration-300">
-              <a href="#" className="text-lg font-bold">{navTabs[key]}</a>
+            <li key={key} className="hover:bg-hope-aquablue hover:rounded-full transition duration-300">
+              <a href="#" className="text-lg font-bold px-4 py-3 block">{navTabs[key]}</a>
             </li>
           ))}
         </ul>
-        <button className='bg-hope-platinum text-black px-8 py-1.5 rounded-full'>Contact Me</button>
+
+        {/* Buttons - right side */}
+        <div className="flex space-x-2">
+          <button className='bg-hope-platinum text-black px-5 py-1 rounded-full hover:opacity-90 transition duration-300'>
+            Contact Me
+          </button>
+          <button className='bg-hope-platinum text-black px-5 py-1 rounded-full hover:opacity-90 transition duration-300'>
+            Learn More
+          </button>
+        </div>
       </nav>
     </header>
   );
