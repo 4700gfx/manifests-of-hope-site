@@ -13,6 +13,7 @@ function App() {
     <div>
       <Navbar></Navbar>
       <Hero></Hero>
+      <AboutUs></AboutUs>
     </div>
   )
 }

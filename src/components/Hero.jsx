@@ -8,7 +8,7 @@ import heropic4 from '../assets/images/heropic4.jpg'
 const Hero = () => {
   return (
     <section className="px-4 sm:px-6 lg:px-8">
-      <div className='bg-hope-aquablue mx-auto mt-10 h-auto min-h-[55vh] w-full max-w-7xl rounded-2xl relative overflow-hidden'>
+      <div className='bg-hope-aquablue mx-auto mt-20 h-auto min-h-[65vh] w-10/12 rounded-2xl relative overflow-hidden'>
         {/* Background gradient overlay for depth */}
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/10 rounded-2xl"></div>
         
@@ -41,7 +41,7 @@ const Hero = () => {
           
           {/* Right 2x2 Grid */}
           <div className="flex-shrink-0 relative order-1 lg:order-2">
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full max-w-xs sm:max-w-sm lg:max-w-md">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full max-w-sm sm:max-w-md lg:max-w-lg">
               
               {/* Top Left - Logo */}
               <div className="aspect-square rounded-2xl overflow-hidden bg-hope-aquablue/20 backdrop-blur-sm flex items-center justify-center p-2 sm:p-3 transition-all duration-300 hover:scale-105 hover:bg-hope-aquablue/30">
@@ -75,7 +75,7 @@ const Hero = () => {
               {/* Bottom Right - Hero Pic 3 */}
               <div className="aspect-square rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 relative group">
                 <img
-                  src={heropic4}
+                  src={heropic3}
                   alt='Transformation'
                   className="w-full h-full object-cover hover:brightness-110 transition-all duration-300"
                 />
