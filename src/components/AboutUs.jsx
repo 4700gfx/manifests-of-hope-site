@@ -17,7 +17,7 @@ const AboutUs = () => {
   ];
 
   return (
-    <section className='px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative'>
+    <section className='px-4 sm:px-6 lg:px-8 py-16 lg:py-16 relative'>
       <div className="mx-auto w-9/12 max-w-none lg:max-w-[90vw] xl:max-w-[85vw]">
         <div className="flex flex-col xl:flex-row items-start gap-12 lg:gap-16">
           
