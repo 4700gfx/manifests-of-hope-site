@@ -14,6 +14,7 @@ function App() {
       <Navbar></Navbar>
       <Hero></Hero>
       <AboutUs></AboutUs>
+      <JourneyCards></JourneyCards>
     </div>
   )
 }

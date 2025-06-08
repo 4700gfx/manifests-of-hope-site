@@ -2,7 +2,7 @@ import React from 'react'
 import logo from '../assets/images/manifest-of-hope-logo-white.png'
 import heropic1 from '../assets/images/heropic1.jpg'
 import heropic2 from '../assets/images/heropic2.jpg'
-import heropic3 from '../assets/images/heropic3.jpg'
+import heropic3 from '../assets/images/heropic4.jpg'
 import heropic4 from '../assets/images/heropic4.jpg'
 
 const Hero = () => {
