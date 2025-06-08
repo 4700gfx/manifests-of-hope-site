@@ -4,7 +4,7 @@ const AboutUs = () => {
   const services = [
     {
       title: "Holistic Wellness Coaching",
-      description: "I am focused on providing quality direction in the realms of wellness to ensure that you are living a Holistic Lifestyle"
+      description: "I am focused on providing quality direction in the realms of wellness to ensure a Holistic Lifestyle"
     },
     {
       title: "Nutritional Guidance",

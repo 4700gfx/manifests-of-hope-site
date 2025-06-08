@@ -15,6 +15,7 @@ function App() {
       <Hero></Hero>
       <AboutUs></AboutUs>
       <JourneyCards></JourneyCards>
+      <Stories></Stories>
     </div>
   )
 }
