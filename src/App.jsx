@@ -6,6 +6,7 @@ import Hero from './components/Hero'
 import JourneyCards from './components/JourneyCards'
 import Navbar from './components/Navbar'
 import Stories from './components/Stories'
+import Questions from './components/Questions'
 
 function App() {
 
@@ -16,6 +17,8 @@ function App() {
       <AboutUs></AboutUs>
       <JourneyCards></JourneyCards>
       <Stories></Stories>
+      <Questions></Questions>
+      <Footer></Footer>
     </div>
   )
 }
