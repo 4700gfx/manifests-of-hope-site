@@ -1,12 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useShopify } from '../context/ShopifyContext';
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useShopify();
+  const [isAdding, setIsAdding] = useState(false);
+  const [addSuccess, setAddSuccess] = useState(false);
 
-  const handleAddToCart = () => {
-    if (product.variants && product.variants.length > 0) {
-      addToCart(product.variants[0].id);
+  const handleAddToCart = async () => {
+    if (!product.variants || product.variants.length === 0) {
+      console.error('No variants available for product:', product);
+      alert('This product is not available for purchase');
+      return;
+    }
+
+    setIsAdding(true);
+    setAddSuccess(false);
+
+    try {
+      console.log('Adding product to cart:', {
+        productId: product.id,
+        variantId: product.variants[0].id,
+        productTitle: product.title
+      });
+
+      await addToCart(product.variants[0].id, 1);
+      
+      setAddSuccess(true);
+      setTimeout(() => setAddSuccess(false), 2000);
+    } catch (error) {
+      console.error('Failed to add product to cart:', error);
+      alert('Failed to add item to cart. Please try again.');
+    } finally {
+      setIsAdding(false);
     }
   };
 
@@ -39,9 +64,16 @@ const ProductCard = ({ product }) => {
           </span>
           <button
             onClick={handleAddToCart}
-            className="bg-hope-aquablue text-white px-6 py-2 rounded-full font-semibold hover:bg-hope-aquablue/90 transition-colors duration-300"
+            disabled={isAdding || !product.variants || product.variants.length === 0}
+            className={`px-6 py-2 rounded-full font-semibold transition-colors duration-300 ${
+              addSuccess 
+                ? 'bg-green-500 text-white' 
+                : isAdding 
+                ? 'bg-gray-400 text-white cursor-not-allowed' 
+                : 'bg-hope-aquablue text-white hover:bg-hope-aquablue/90'
+            }`}
           >
-            Add to Cart
+            {isAdding ? 'Adding...' : addSuccess ? 'Added!' : 'Add to Cart'}
           </button>
         </div>
       </div>
