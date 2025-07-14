@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
-import shopifyClient from '../config/shopify';
+import shopifyClient from '../config/Shopify.jsx';
 
 const ShopifyContext = createContext();
 

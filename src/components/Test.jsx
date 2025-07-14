@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import shopifyClient from '../config/shopify';
+import shopifyClient from '../config/Shopify';
 
 const ShopifyTest = () => {
   const [testResult, setTestResult] = useState('');
