@@ -6,7 +6,7 @@ import heropic3 from '../assets/images/heropic4.jpg'
 
 const Hero = () => {
   return (
-    <section className="px-4 sm:px-6 lg:px-8 group">
+    <section className="px-4 sm:px-6 lg:px-8 group" id="home">
       <div className='bg-hope-aquablue mx-auto mt-20 h-auto min-h-[55vh] w-10/12 rounded-2xl relative overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-hope-aquablue/20 hover:scale-[1.02]'>
         {/* Background gradient overlay for depth */}
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/10 rounded-2xl transition-all duration-500 group-hover:to-black/5"></div>

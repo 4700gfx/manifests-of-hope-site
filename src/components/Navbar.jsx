@@ -10,12 +10,24 @@ const Navbar = () => {
   // Calculate total items in cart
   const cartItemCount = cart ? cart.lineItems.reduce((total, item) => total + item.quantity, 0) : 0;
   
+  // Function to handle smooth scrolling to sections
+  const handleScrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest'
+      });
+    }
+  };
+  
   const navTabs = {
-    home: { name: "Home", path: "/" },
-    aboutMe: { name: "About Me", path: "/about" },
-    journeys: { name: "Journeys", path: "/journeys" },
-    stories: { name: "Stories", path: "/stories" },
-    shop: { name: "Shop", path: "/shop" }, // Added shop tab
+    home: { name: "Home", sectionId: "home", isScroll: true },
+    aboutMe: { name: "About Me", sectionId: "about", isScroll: true },
+    journeys: { name: "Journeys", path: "/journeys", isScroll: false },
+    stories: { name: "Stories", sectionId: "stories", isScroll: true },
+    shop: { name: "Shop", path: "/shop", isScroll: false },
   };
 
   return (
@@ -30,20 +42,37 @@ const Navbar = () => {
 
         {/* Nav links - centered */}
         <ul className="flex space-x-2 font-semibold">
-          {Object.keys(navTabs).map((key) => (
-            <li key={key} className="relative group">
-              <Link 
-                to={navTabs[key].path}
-                className={`text-lg font-bold px-5 py-2.5 block rounded-full transition-all duration-300 ease-in-out hover:bg-hope-aquablue/20 hover:backdrop-blur-sm hover:text-hope-platinum hover:scale-105 hover:-translate-y-0.5 relative overflow-hidden ${
-                  location.pathname === navTabs[key].path ? 'text-hope-platinum bg-hope-aquablue/10' : ''
-                }`}
-              >
-                {navTabs[key].name}
-                {/* Subtle underline effect */}
-                <span className="absolute bottom-1 left-1/2 w-0 h-0.5 bg-hope-platinum rounded-full transition-all duration-300 group-hover:w-3/4 group-hover:left-1/8"></span>
-              </Link>
-            </li>
-          ))}
+          {Object.keys(navTabs).map((key) => {
+            const tab = navTabs[key];
+            
+            return (
+              <li key={key} className="relative group">
+                {tab.isScroll ? (
+                  // Scroll to section button
+                  <button 
+                    onClick={() => handleScrollToSection(tab.sectionId)}
+                    className={`text-lg font-bold px-5 py-2.5 block rounded-full transition-all duration-300 ease-in-out hover:bg-hope-aquablue/20 hover:backdrop-blur-sm hover:text-hope-platinum hover:scale-105 hover:-translate-y-0.5 relative overflow-hidden cursor-pointer`}
+                  >
+                    {tab.name}
+                    {/* Subtle underline effect */}
+                    <span className="absolute bottom-1 left-1/2 w-0 h-0.5 bg-hope-platinum rounded-full transition-all duration-300 group-hover:w-3/4 group-hover:left-1/8"></span>
+                  </button>
+                ) : (
+                  // Regular router link
+                  <Link 
+                    to={tab.path}
+                    className={`text-lg font-bold px-5 py-2.5 block rounded-full transition-all duration-300 ease-in-out hover:bg-hope-aquablue/20 hover:backdrop-blur-sm hover:text-hope-platinum hover:scale-105 hover:-translate-y-0.5 relative overflow-hidden ${
+                      location.pathname === tab.path ? 'text-hope-platinum bg-hope-aquablue/10' : ''
+                    }`}
+                  >
+                    {tab.name}
+                    {/* Subtle underline effect */}
+                    <span className="absolute bottom-1 left-1/2 w-0 h-0.5 bg-hope-platinum rounded-full transition-all duration-300 group-hover:w-3/4 group-hover:left-1/8"></span>
+                  </Link>
+                )}
+              </li>
+            )
+          })}
         </ul>
 
         {/* Buttons, Cart, and Social Media - right side */}
@@ -96,7 +125,7 @@ const Navbar = () => {
           <div className="flex items-center space-x-3 ml-4 pl-4 border-l border-white/20">
             {/* Instagram */}
             <a 
-              href="#" 
+              href="https://www.instagram.com/hopeyousmile" 
               className="group p-2 rounded-full hover:bg-hope-aquablue/20 hover:scale-110 transition-all duration-300 ease-in-out"
               aria-label="Instagram"
             >
@@ -107,7 +136,7 @@ const Navbar = () => {
 
             {/* Facebook */}
             <a 
-              href="#" 
+              href="https://www.facebook.com/HopeYouSmilee?mibextid=wwXIfr&rdid=tC8QRO4bPqZzf8DJ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F18oWW1BBUx%2F%3Fmibextid%3DwwXIfr" 
               className="group p-2 rounded-full hover:bg-hope-aquablue/20 hover:scale-110 transition-all duration-300 ease-in-out"
               aria-label="Facebook"
             >

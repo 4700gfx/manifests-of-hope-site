@@ -45,7 +45,7 @@ const Stories = () => {
   }
 
   return (  
-    <section className="flex flex-col mt-10">
+    <section className="flex flex-col mt-10" id='stories'>
       <h1 className='text-white mx-auto text-4xl sm:text-5xl lg:text-6xl font-bold mb-8'>
         <span className='font-playfair text-hope-platinum italic'>Our</span> Stories
       </h1>

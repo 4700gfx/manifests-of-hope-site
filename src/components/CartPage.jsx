@@ -1,8 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useShopify } from '../context/ShopifyContext';
 
 const CartPage = () => {
   const { cart, removeFromCart, updateCartItem } = useShopify();
+  const navigate = useNavigate();
 
   // Helper function to safely get numeric value from price
   const getPriceValue = (priceObj) => {
@@ -62,6 +64,11 @@ const CartPage = () => {
   const totalAmount = calculateTotal();
   const itemCount = validLineItems.reduce((count, item) => count + parseInt(item.quantity), 0);
 
+  // Handle navigation to shop page
+  const handleStartShopping = () => {
+    navigate('/shop');
+  };
+
   if (!cart || validLineItems.length === 0) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-hope-aquablue/10 to-hope-aquablue/20 flex items-center justify-center">
@@ -73,7 +80,10 @@ const CartPage = () => {
           </div>
           <h2 className="text-3xl font-bold text-gray-800 mb-4">Your cart is empty</h2>
           <p className="text-gray-600 mb-6">Discover amazing products and add them to your cart!</p>
-          <button className="bg-hope-aquablue text-white px-6 py-3 rounded-full font-semibold hover:bg-hope-aquablue/90 transition-colors duration-300">
+          <button 
+            onClick={handleStartShopping}
+            className="bg-hope-aquablue text-white px-6 py-3 rounded-full font-semibold hover:bg-hope-aquablue/90 transition-colors duration-300 transform hover:scale-105"
+          >
             Start Shopping
           </button>
         </div>
@@ -122,14 +132,14 @@ const CartPage = () => {
                           />
                           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 rounded-xl transition-colors duration-300"></div>
                         </div>
-                      </div>
 
-                                              {/* Quantity Badge */}
+                        {/* Quantity Badge */}
                         <div className="absolute -top-2 -right-2 bg-hope-aquablue text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shadow-lg">
                           {quantity}
                         </div>
+                      </div>
 
-                        {/* Product Details */}
+                      {/* Product Details */}
                       <div className="flex-1 min-w-0">
                         <h3 className="text-xl font-bold text-gray-800 mb-2 truncate">
                           {item.title || 'Unknown Product'}
