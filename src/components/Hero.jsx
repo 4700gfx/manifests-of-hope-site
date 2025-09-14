@@ -33,7 +33,11 @@ const Hero = () => {
             </p>
             {/* CTA Button */}
             <button className="group/btn bg-hope-platinum text-hope-aquablue px-8 sm:px-12 py-3 sm:py-4 rounded-full font-bold font-belleza text-base sm:text-lg hover:bg-white transform hover:scale-105 hover:-translate-y-1 transition-all duration-300 ease-in-out relative overflow-hidden shadow-lg hover:shadow-xl">
-              <span className="relative z-10">Learn More</span>
+              <span className="relative z-10">
+                <a>
+                  Learn More
+                </a>
+              </span>
               <div className="absolute inset-0 bg-gradient-to-r from-white to-hope-platinum opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 rounded-full"></div>
             </button>
           </div>

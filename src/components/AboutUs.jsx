@@ -1,4 +1,5 @@
 import hopeImage from '../assets/images/hopeimg.avif'
+import { Link } from 'react-router-dom'
 
 const AboutUs = () => {
   const services = [
@@ -68,11 +69,15 @@ const AboutUs = () => {
                     Ready to begin? Explore the Journeys to discover what awaits you.
                   </p>
                   
-                  {/* Optional CTA Button */}
-                  <button className="group bg-hope-platinum text-hope-aquablue px-8 py-3 rounded-full font-bold font-belleza text-lg hover:bg-white transform hover:scale-105 hover:-translate-y-1 transition-all duration-300 ease-in-out relative overflow-hidden">
-                    <span className="relative z-10">Explore Journeys</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-white to-hope-platinum opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
-                  </button>
+                  {/* CTA Button with Navigation */}
+                  <Link to="/journeys" className="inline-block">
+                    <button className="group bg-hope-platinum text-hope-aquablue px-8 py-3 rounded-full font-bold font-belleza text-lg hover:bg-white transform hover:scale-105 hover:-translate-y-1 transition-all duration-300 ease-in-out relative overflow-hidden">
+                      <span className="relative z-10">
+                        Explore Journeys
+                      </span>
+                      <div className="absolute inset-0 bg-gradient-to-r from-white to-hope-platinum opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -105,7 +110,9 @@ const AboutUs = () => {
                 {/* Services CTA */}
                 <div className="mt-8 text-center">
                   <button className="group bg-transparent border-2 border-hope-platinum text-hope-platinum px-6 py-2 rounded-full font-belleza text-base hover:bg-hope-platinum hover:text-hope-aquablue transition-all duration-300 ease-in-out">
-                    <span className="relative z-10">Learn More</span>
+                    <span className="relative z-10" id='#journeyCards'>
+                    Learn More
+                    </span>
                   </button>
                 </div>
               </div>

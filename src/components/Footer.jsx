@@ -10,16 +10,14 @@ const Footer = () => {
   };
 
   const services = [
-    "Life Coaching",
-    "Spiritual Guidance",
-    "Mindfulness Workshops",
-    "Goal Setting",
-    "Personal Development"
+    "Birth Deliveries & Mid-Wife Services",
+    "Nutritional Coaching",
+    "Homeopathy",
+    "Wellness Coaching"
   ];
 
   const contactInfo = {
-    email: "hello@manifestofhope.com",
-    phone: "(555) 123-4567"
+    email: "manifestofhope@gmail.com",
   };
 
   return (
@@ -45,7 +43,7 @@ const Footer = () => {
             <div className="flex items-center space-x-3">
               {/* Instagram */}
               <a 
-                href="#" 
+                href="https://www.instagram.com/hopeyousmile" 
                 className="group p-2 rounded-full hover:bg-hope-aquablue/20 hover:scale-110 transition-all duration-300 ease-in-out"
                 aria-label="Instagram"
               >
@@ -56,23 +54,12 @@ const Footer = () => {
 
               {/* Facebook */}
               <a 
-                href="#" 
+              href="https://www.facebook.com/HopeYouSmilee?mibextid=wwXIfr&rdid=tC8QRO4bPqZzf8DJ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F18oWW1BBUx%2F%3Fmibextid%3DwwXIfr" 
                 className="group p-2 rounded-full hover:bg-hope-aquablue/20 hover:scale-110 transition-all duration-300 ease-in-out"
                 aria-label="Facebook"
               >
                 <svg className="w-5 h-5 text-white group-hover:text-hope-platinum transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                </svg>
-              </a>
-
-              {/* X (Twitter) */}
-              <a 
-                href="#" 
-                className="group p-2 rounded-full hover:bg-hope-aquablue/20 hover:scale-110 transition-all duration-300 ease-in-out"
-                aria-label="X (Twitter)"
-              >
-                <svg className="w-5 h-5 text-white group-hover:text-hope-platinum transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/>
                 </svg>
               </a>
             </div>
