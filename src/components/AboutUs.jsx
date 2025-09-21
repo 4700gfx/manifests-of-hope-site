@@ -1,4 +1,5 @@
 import hopeImage from '../assets/images/hopeimg.avif'
+import logo from '../assets/images/manifest-of-hope-logo-color.png'
 import { Link } from 'react-router-dom'
 
 const AboutUs = () => {
@@ -26,8 +27,8 @@ const AboutUs = () => {
           <div className="flex-shrink-0 w-full xl:w-auto">
             <div className="relative mx-auto xl:mx-0 w-80 sm:w-96 lg:w-[420px] h-80 sm:h-96 lg:h-[500px] rounded-3xl overflow-hidden group">
               <img 
-                className='w-full h-full object-cover transition-all duration-500 group-hover:scale-105' 
-                src={hopeImage} 
+                className='w-full h-9/12 object-contain transition-all duration-500 group-hover:scale-105' 
+                src={logo} 
                 alt='Picture of Hope'
               />
               {/* Subtle overlay for depth */}

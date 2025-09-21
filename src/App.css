@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 body{
-  background-color: #2B2258;
+  background-color: #000000;
   color: white;
 }
 
@@ -17,10 +17,10 @@ h3, h4, h5{
 
 @theme{
   --color-hope-indigo: #2B2258;
-  --color-hope-blue: #96B0BA;
-  --color-hope-aquablue: #176FB9;
+  --color-hope-blue: #0B375B;
+  --color-hope-aquablue: #007A7A;
   --color-hope-black: #000000; 
-  --color-hope-platinum: #DADBDC; 
+  --color-hope-platinum: #96999C; 
   --font-belleza: "Belleza", sans-serif;
   --font-playfair: "Playfair Display", serif;
 }
