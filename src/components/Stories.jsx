@@ -27,7 +27,15 @@ const Stories = () => {
       text: "Hope Simmons was the miracle that we had been asking for. Our previous hospital experience for our first birth was very harsh, and life threatening. Naturally we wanted a better option and Hope was that! The birth of our daughter was beautiful and set up perfectly for what we needed. Our beautiful baby girl was born in our own home, in our own tub, and Hope helped us be confident in our own abilities every step of the way. Would 100% work with Hope again and recommend that EVERYONE should go through her for their birthing experience. Her prep, postpartum assistance, and natural remedies were the best. She's amazing!",
       image: profilePic,
       rating: 5
+    },
+
+    {
+      name: "Jenise",
+      text: "Hope was integral in our home birth experience and we are so thankful for what she provided to us throughout our journey. She has a wealth of knowledge and gracefully shared what she knew with us which greatly helped to prepare and equip us for the labor and delivery process. She also has a calm demeanor and is encouraging during times of doubt and worry. She really helped us to feel confident in our decision and in our ability to see it through. We had a successful and beautiful home birth, and we would highly recommend her services.",
+      image: profilePic,
+      rating: 5
     }
+
   ]
 
   // Progress animation

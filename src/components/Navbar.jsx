@@ -3,21 +3,247 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useShopify } from '../context/ShopifyContext'
 import logo from '../assets/images/manifest-of-hope-logo-white.png'
 
+// Contact Modal Component
+const ContactModal = ({ isOpen, onClose }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+
+  useEffect(() => {
+    if (!isOpen) {
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setSubmitStatus(null);
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+    
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isOpen, onClose]);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      // Replace 'YOUR_FORMSPREE_ID' with your actual FormSpree form ID
+      const response = await fetch('https://formspree.io/f/xyzneyzg', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => {
+          onClose();
+        }, 2000);
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+      <div 
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        onClick={onClose}
+      />
+      
+      <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+        <div className="relative bg-gradient-to-r from-cyan-500 to-blue-600 text-white p-6 rounded-t-2xl">
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 p-2 hover:bg-white/20 rounded-full transition-colors duration-200"
+            aria-label="Close modal"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          
+          <div className="pr-12">
+            <h2 className="text-2xl font-bold mb-2">Get In Touch</h2>
+            <p className="text-white/90 text-sm">
+              Have a question or want to work together? I'd love to hear from you!
+            </p>
+          </div>
+        </div>
+
+        <div className="p-6 space-y-5">
+          <div>
+            <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
+              Full Name *
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              required
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-200 placeholder-gray-400 text-gray-900 bg-white"
+              placeholder="Your full name"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+              Email Address *
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              required
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-200 placeholder-gray-400 text-gray-900 bg-white"
+              placeholder="your.email@example.com"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-2">
+              Subject *
+            </label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              value={formData.subject}
+              onChange={handleInputChange}
+              required
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-200 placeholder-gray-400 text-gray-900 bg-white"
+              placeholder="What's this about?"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
+              Message *
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              value={formData.message}
+              onChange={handleInputChange}
+              required
+              rows={4}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-200 placeholder-gray-400 resize-none text-gray-900 bg-white"
+              placeholder="Tell me about your project, question, or how I can help..."
+            />
+          </div>
+
+          {submitStatus === 'success' && (
+            <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg flex items-center space-x-2">
+              <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              <span className="font-medium">Message sent successfully! I'll get back to you soon.</span>
+            </div>
+          )}
+
+          {submitStatus === 'error' && (
+            <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg flex items-center space-x-2">
+              <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+              </svg>
+              <span className="font-medium">Something went wrong. Please try again.</span>
+            </div>
+          )}
+
+          <button
+            type="button"
+            onClick={handleSubmit}
+            disabled={isSubmitting}
+            className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:from-cyan-600 hover:to-blue-700 focus:ring-4 focus:ring-cyan-300 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+          >
+            {isSubmitting ? (
+              <>
+                <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>Sending...</span>
+              </>
+            ) : (
+              <>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                </svg>
+                <span>Send Message</span>
+              </>
+            )}
+          </button>
+        </div>
+
+        <div className="px-6 pb-6">
+          <p className="text-xs text-gray-500 text-center">
+            Your information is secure and will only be used to respond to your inquiry.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Main Navbar Component
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { cart } = useShopify();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   
-  // Calculate total items in cart
   const cartItemCount = cart ? cart.lineItems.reduce((total, item) => total + item.quantity, 0) : 0;
   
-  // Close mobile menu when route changes
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
-  // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (isMobileMenuOpen && !event.target.closest('.mobile-menu-container')) {
@@ -29,12 +255,9 @@ const Navbar = () => {
     return () => document.removeEventListener('click', handleClickOutside);
   }, [isMobileMenuOpen]);
   
-  // Function to handle navigation and scrolling
   const handleScrollToSection = (sectionId) => {
-    // If we're not on the home page, navigate there first
     if (location.pathname !== '/') {
       navigate('/');
-      // Wait for navigation to complete, then scroll
       setTimeout(() => {
         const element = document.getElementById(sectionId);
         if (element) {
@@ -46,7 +269,6 @@ const Navbar = () => {
         }
       }, 100);
     } else {
-      // We're already on home page, just scroll
       const element = document.getElementById(sectionId);
       if (element) {
         element.scrollIntoView({ 
@@ -56,7 +278,6 @@ const Navbar = () => {
         });
       }
     }
-    // Close mobile menu after navigation
     setIsMobileMenuOpen(false);
   };
 
@@ -80,17 +301,14 @@ const Navbar = () => {
     return (
       <li key={tabKey} className="relative group">
         {tab.isScroll ? (
-          // Scroll to section button
           <button 
             onClick={() => handleScrollToSection(tab.sectionId)}
             className={baseClasses}
           >
             {tab.name}
-            {/* Subtle underline effect */}
             <span className="absolute bottom-1 left-1/2 w-0 h-0.5 bg-hope-platinum rounded-full transition-all duration-300 group-hover:w-3/4 group-hover:left-1/8"></span>
           </button>
         ) : (
-          // Regular router link
           <Link 
             to={tab.path}
             onClick={() => setIsMobileMenuOpen(false)}
@@ -99,7 +317,6 @@ const Navbar = () => {
             }`}
           >
             {tab.name}
-            {/* Subtle underline effect */}
             <span className="absolute bottom-1 left-1/2 w-0 h-0.5 bg-hope-platinum rounded-full transition-all duration-300 group-hover:w-3/4 group-hover:left-1/8"></span>
           </Link>
         )}
@@ -110,23 +327,19 @@ const Navbar = () => {
   return (
     <header className="text-white font-belleza relative z-50">
       <nav className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
-        {/* Logo */}
         <div className="flex items-center space-x-3">
           <Link to="/">
             <img src={logo} alt="logo" className="h-12 w-auto hover:scale-105 transition-transform duration-300" />
           </Link>
         </div>
 
-        {/* Desktop Nav links - centered */}
         <ul className="hidden lg:flex space-x-2 font-semibold">
           {Object.keys(navTabs).map((key) => (
             <NavLink key={key} tab={navTabs[key]} tabKey={key} />
           ))}
         </ul>
 
-        {/* Desktop Buttons, Cart, and Social Media - right side */}
         <div className="hidden lg:flex items-center space-x-4">
-          {/* Cart Icon */}
           <Link 
             to="/cart" 
             className="group relative p-3 rounded-full hover:bg-hope-aquablue/20 hover:scale-110 transition-all duration-300 ease-in-out"
@@ -146,30 +359,28 @@ const Navbar = () => {
               />
             </svg>
             
-            {/* Cart item count badge */}
             {cartItemCount > 0 && (
               <span className="absolute -top-1 -right-1 bg-hope-platinum text-hope-aquablue text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center animate-pulse shadow-lg">
                 {cartItemCount > 99 ? '99+' : cartItemCount}
               </span>
             )}
             
-            {/* Hover tooltip */}
             <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
               {cartItemCount > 0 ? `${cartItemCount} item${cartItemCount > 1 ? 's' : ''}` : 'Cart is empty'}
             </div>
           </Link>
 
-          {/* Buttons */}
           <div className="flex space-x-3">
-            <button className='group bg-hope-platinum text-hope-aquablue px-8 py-2 rounded-full font-bold font-belleza hover:bg-white hover:scale-105 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ease-in-out relative overflow-hidden'>
+            <button 
+              onClick={() => setIsContactModalOpen(true)}
+              className='group bg-hope-platinum text-hope-aquablue px-8 py-2 rounded-full font-bold font-belleza hover:bg-white hover:scale-105 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ease-in-out relative overflow-hidden'
+            >
               <span className="relative z-10">Contact Me</span>
               <div className="absolute inset-0 bg-gradient-to-r from-white to-hope-platinum opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
             </button>
           </div>
 
-          {/* Social Media Icons */}
           <div className="flex items-center space-x-3 ml-4 pl-4 border-l border-white/20">
-            {/* Instagram */}
             <a 
               href="https://www.instagram.com/hopeyousmile" 
               className="group p-2 rounded-full hover:bg-hope-aquablue/20 hover:scale-110 transition-all duration-300 ease-in-out"
@@ -180,7 +391,6 @@ const Navbar = () => {
               </svg>
             </a>
 
-            {/* Facebook */}
             <a 
               href="https://www.facebook.com/HopeYouSmilee?mibextid=wwXIfr&rdid=tC8QRO4bPqZzf8DJ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F18oWW1BBUx%2F%3Fmibextid%3DwwXIfr" 
               className="group p-2 rounded-full hover:bg-hope-aquablue/20 hover:scale-110 transition-all duration-300 ease-in-out"
@@ -190,15 +400,10 @@ const Navbar = () => {
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
               </svg>
             </a>
-
-            {/* X (Twitter) */}
-
           </div>
         </div>
 
-        {/* Mobile Menu Button and Cart */}
         <div className="flex lg:hidden items-center space-x-4">
-          {/* Mobile Cart Icon */}
           <Link 
             to="/cart" 
             className="group relative p-3 rounded-full hover:bg-hope-aquablue/20 hover:scale-110 transition-all duration-300 ease-in-out"
@@ -218,7 +423,6 @@ const Navbar = () => {
               />
             </svg>
             
-            {/* Cart item count badge */}
             {cartItemCount > 0 && (
               <span className="absolute -top-1 -right-1 bg-hope-platinum text-hope-aquablue text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center animate-pulse shadow-lg">
                 {cartItemCount > 99 ? '99+' : cartItemCount}
@@ -226,7 +430,6 @@ const Navbar = () => {
             )}
           </Link>
 
-          {/* Hamburger Menu Button */}
           <button
             onClick={toggleMobileMenu}
             className="mobile-menu-container group relative p-3 rounded-full hover:bg-hope-aquablue/20 transition-all duration-300 ease-in-out focus:outline-none"
@@ -252,17 +455,14 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Menu Overlay */}
         {isMobileMenuOpen && (
           <div className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40" />
         )}
 
-        {/* Mobile Menu */}
         <div className={`mobile-menu-container lg:hidden fixed top-0 right-0 h-full w-80 bg-gradient-to-b from-hope-aquablue to-hope-aquablue/90 backdrop-blur-md shadow-2xl transform transition-transform duration-300 ease-in-out z-50 ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}>
           <div className="flex flex-col h-full">
-            {/* Mobile Menu Header */}
             <div className="flex items-center justify-between p-6 border-b border-white/20">
               <h3 className="text-xl font-bold text-white">Menu</h3>
               <button
@@ -276,7 +476,6 @@ const Navbar = () => {
               </button>
             </div>
 
-            {/* Mobile Navigation Links */}
             <nav className="flex-1 px-6 py-8">
               <ul className="space-y-2">
                 {Object.keys(navTabs).map((key) => (
@@ -285,16 +484,19 @@ const Navbar = () => {
               </ul>
             </nav>
 
-            {/* Mobile Buttons */}
             <div className="p-6 space-y-4 border-t border-white/20">
-              <button className='w-full bg-hope-platinum text-hope-aquablue py-3 rounded-lg font-bold font-belleza hover:bg-white transition-all duration-300 ease-in-out'>
+              <button 
+                onClick={() => {
+                  setIsContactModalOpen(true);
+                  setIsMobileMenuOpen(false);
+                }}
+                className='w-full bg-hope-platinum text-hope-aquablue py-3 rounded-lg font-bold font-belleza hover:bg-white transition-all duration-300 ease-in-out'
+              >
                 Contact Me
               </button>
             </div>
 
-            {/* Mobile Social Media Icons */}
             <div className="flex justify-center items-center space-x-6 p-6 border-t border-white/20">
-              {/* Instagram */}
               <a 
                 href="https://www.instagram.com/hopeyousmile" 
                 className="group p-3 rounded-full hover:bg-white/10 transition-all duration-300 ease-in-out"
@@ -305,7 +507,6 @@ const Navbar = () => {
                 </svg>
               </a>
 
-              {/* Facebook */}
               <a 
                 href="https://www.facebook.com/HopeYouSmilee?mibextid=wwXIfr&rdid=tC8QRO4bPqZzf8DJ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F18oWW1BBUx%2F%3Fmibextid%3DwwXIfr" 
                 className="group p-3 rounded-full hover:bg-white/10 transition-all duration-300 ease-in-out"
@@ -316,7 +517,6 @@ const Navbar = () => {
                 </svg>
               </a>
 
-              {/* X (Twitter) */}
               <a 
                 href="#" 
                 className="group p-3 rounded-full hover:bg-white/10 transition-all duration-300 ease-in-out"
@@ -330,6 +530,12 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
+
+      {/* Contact Modal */}
+      <ContactModal 
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
     </header>
   );
 }
