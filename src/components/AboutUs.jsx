@@ -38,10 +38,9 @@ const AboutUs = () => {
             
             {/* Text Content */}
             <div className={`flex-1 text-center lg:text-left transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              <h1 className='text-white text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6 sm:mb-8 lg:mb-12 animate-fade-in'>
-                About{' '}
+              <h1 className='text-white text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-playfair italic leading-tight mb-6 sm:mb-8 lg:mb-12 animate-fade-in'>
                 <span className='font-playfair text-hope-platinum italic font-normal relative inline-block group'>
-                  Hope
+                   About Hope
                   <div className="absolute -bottom-1 lg:-bottom-2 left-0 w-full h-0.5 lg:h-1 bg-hope-platinum/60 rounded-full transition-all duration-500 group-hover:bg-hope-platinum group-hover:h-1 lg:group-hover:h-1.5"></div>
                 </span>
               </h1>

@@ -170,7 +170,7 @@ const Stories = () => {
       {/* Header */}
       <div className="text-center mb-12">
         <h1 className='text-white mx-auto text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6'>
-          <span className='font-playfair text-hope-platinum italic'>Our</span> Stories
+          <span className='font-playfair text-white italic'>Our Stories</span>
         </h1>
 
         <p className="font-belleza max-w-4xl mx-auto text-sm sm:text-base lg:text-lg text-white/80 leading-relaxed px-4">

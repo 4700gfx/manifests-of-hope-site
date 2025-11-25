@@ -34,7 +34,7 @@ const JourneyCards = () => {
         {/* Header Section */}
         <div className="text-center mb-10">
           <h1 className='text-white text-4xl sm:text-5xl lg:text-6xl font-bold mb-8'>
-            <span className='font-playfair text-hope-platinum italic'>Journeys</span> Overview
+            <span className='font-playfair text-white italic'>Journeys Overview</span> 
           </h1>
           <p className='font-belleza text-white/80 text-base sm:text-md leading-relaxed max-w-4xl mx-auto'>
             I call my services journeys because they may take unpredictable turns, but we walk through anyways. At Manifests of Hope, I specialize in providing a range of personalized services designed to support your journey towards optimal well-being. Whether you're seeking nurturing care during pregnancy and childbirth, personalized nutrition guidance, natural remedies through homeopathy, or holistic wellness coaching, I am here to support you every step of the way. To see what others have said about my Journeys, check out the Stories
