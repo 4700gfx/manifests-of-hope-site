@@ -1,7 +1,9 @@
 import React, { useState, useCallback, memo } from 'react';
 import { ShoppingCart, Plus, Check, Star, Heart, ChevronLeft, ChevronRight, Eye, X, ChevronDown, ChevronUp } from 'lucide-react';
+import { useShopify } from '../context/ShopifyContext';
 
 const ProductCard = memo(({ product, viewMode = 'grid' }) => {
+  const { addToCart } = useShopify(); // ✅ FIXED: Added Shopify hook
   const [isAdding, setIsAdding] = useState(false);
   const [addSuccess, setAddSuccess] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -9,6 +11,7 @@ const ProductCard = memo(({ product, viewMode = 'grid' }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showImageModal, setShowImageModal] = useState(false);
   const [showFullDescription, setShowFullDescription] = useState(false);
+  const [quantity, setQuantity] = useState(1); // ✅ FIXED: Added quantity state
 
   const handleAddToCart = useCallback(async () => {
     if (!product.variants?.length) {
@@ -20,15 +23,20 @@ const ProductCard = memo(({ product, viewMode = 'grid' }) => {
     setAddSuccess(false);
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 800));
+      // Add to Shopify cart
+      await addToCart(product.variants[0].id, quantity);
+      
+      // Show success animation
       setAddSuccess(true);
       setTimeout(() => setAddSuccess(false), 2500);
     } catch (error) {
       console.error('Failed to add to cart:', error);
+      // Show error to user
+      alert('Failed to add item to cart. Please try again.');
     } finally {
       setIsAdding(false);
     }
-  }, [product.variants]);
+  }, [addToCart, product.variants, quantity]);
 
   const formatPrice = useCallback((priceObj) => {
     if (typeof priceObj === 'string') return priceObj;
